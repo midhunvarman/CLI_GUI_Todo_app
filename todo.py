@@ -76,22 +76,22 @@ def done(todo_item):
 
         todo_item = int(todo_item)
 
-        if(todo_item > x or todo_item <= 0):
+        if(todo_item > x or todo_item == 0):
             print("Error: todo #%d does not exist." %todo_item)
             sys.exit()
 
-        x = 0
+        x = 1
 
         f = open("todo.txt","wt")
         fdone = open("done.txt","at")
         for i in data:
             if(x == todo_item):
-                x = x+1
                 # YYYY-MM-DD
                 d1 = today.strftime("%Y-%m-%d")
                 # print("d1 =", d1)
                 i = "x " + d1 + " " + i + "\n"
                 fdone.write(i)
+                x = x+1
             else:
                 fitem = i + "\n"
                 f.write(fitem)
@@ -148,7 +148,7 @@ def report():
         print("Error: No todos added")
 
 
-if len(sys.argv) > 3:  
+if len(sys.argv) > 3:
     print("length exceeded")
     sys.exit()
 
@@ -158,6 +158,7 @@ if __name__ == "__main__":
     if(len(sys.argv) == 1):
         Help()
     elif(sys.argv[1] == "add"):
+        # add(sys.argv[2])
         try:
             add(sys.argv[2])
         except IndexError:
