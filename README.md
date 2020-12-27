@@ -237,6 +237,15 @@ $ ./todo ls
 [2] new task with deadline  | 2020/12/18
 [1] water the plants
 ```
+### 7. Todo application in GUI interface
+
+Use the `gui` command to call the GUI application.
+
+```
+$ ./todo gui
+```
+
+[![Todo-GUI](https://drive.google.com/file/d/1WnNGYUKTv2uigKa2cBNs4bQBvarTAU9G/view?usp=sharing)]
 
 ## Improving README.md
 
