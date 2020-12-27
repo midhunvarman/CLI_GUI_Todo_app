@@ -10,10 +10,11 @@ import sys
 ###Functions###
 def add(todo_item):
     f = open("todo.txt","at")
-    fitem = todo_item + "\n"
+    fitem = todo_item+ "\n"
     f.write(fitem)
     f.close()
     print("Added todo: \"%s\"" %todo_item)
+    exit()
 
 def ls():
     try:
@@ -49,7 +50,7 @@ def del1(todo_item):
             print("Error: todo #%d does not exist. Nothing deleted." %todo_item)
             sys.exit()
 
-        x = 0
+        x = 1
 
         f = open("todo.txt","wt")
         for i in data:
@@ -146,6 +147,57 @@ def report():
         sys.stdout.buffer.write("\n".encode('utf8'))
     except FileNotFoundError:
         print("Error: No todos added")
+
+def deadline(todo_no,deadline):
+    try:
+        yyyy,mm,dd = deadline.split("/")
+        if(int(yyyy)/10000 != 0 and int(yyyy) < 2020):
+            print("Error date syntax invalid use yyyy/mm/dd")
+            exit()
+        elif(int(mm)/100 != 0 and int(mm) >= 13):
+            print("Error date syntax invalid use yyyy/mm/dd")
+            exit()
+        elif(int(dd)/100!= 0 and int(mm) >= 32):
+            print("Error date syntax invalid use yyyy/mm/dd")
+            exit()
+    except ValueError:
+        print("Error date syntax invalid use yyyy/mm/dd")
+
+    try:
+
+        f = open("todo.txt","rt")
+        data = f.read().split("\n")
+        data = data[:-1]
+        x = len(data)
+        f.close()
+
+        todo_item = int(todo_item)
+
+        if(todo_item > x or todo_item <= 0):
+            print("Error: todo #%d does not exist. Nothing deleted." %todo_item)
+            sys.exit()
+
+        x = 1
+
+        f = open("todo.txt","wt")
+        for i in data:
+            if(x == todo_item):
+                taks =i.split("x")
+                if(len(taks)==2):
+                    print("Error deadline already present")
+                    exit()
+                x = x+1
+                fitem = i + "x" +deadline +"\n"
+                f.write(fitem)
+            else:
+                fitem = i + "\n"
+                f.write(fitem)
+            x = x+1
+        f.close()
+        print("Deleted todo #%d" %todo_item)
+    except FileNotFoundError:
+        print("Error file not found")
+    f = open("todo.txt","at")
 
 
 if len(sys.argv) > 3:
