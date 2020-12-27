@@ -245,7 +245,7 @@ Use the `gui` command to call the GUI application.
 $ ./todo gui
 ```
 
-[![Todo-GUI](https://drive.google.com/file/d/1WnNGYUKTv2uigKa2cBNs4bQBvarTAU9G/view?usp=sharing)]
+![Todo-GUI](https://drive.google.com/file/d/1WnNGYUKTv2uigKa2cBNs4bQBvarTAU9G/view?usp=sharing)
 
 ## Improving README.md
 
