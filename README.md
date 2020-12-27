@@ -129,7 +129,7 @@ change light bulb
 
 ### 1. Help
 
-Executing the command without any arguments, or with a single argument `help` prints the CLI usage.
+Executing the command without any arguments, or with a single argument `help` prints the CLI usage. "deadline" another functionality I added is not part of the help, its usage is listed below
 
 ```
 $ ./todo help
@@ -200,6 +200,42 @@ Use the `report` command to see the latest tally of pending and completed todos.
 ```
 $ ./todo report
 yyyy-mm-dd Pending : 1 Completed : 4
+```
+### 7. Add deadline to the task
+
+Use the `deadline` command to add a deadline to pending todos.The format for the deadline command is
+
+```
+$ ./todo deadline "NUMBER YYYY/MM/DD"
+```
+
+Sample code
+
+```
+$ ./todo deadline "2 2020
+deadline added to #%d
+```
+
+Adding a deadline in wrong format will result in a error message.
+
+```
+$ ./todo deadline "2 2020/222/22"
+Error date syntax invalid use yyyy/mm/dds
+```
+
+Adding a deadline to a task with existing deadline will update to new one.
+
+```
+$ ./todo ls
+[2] new task with deadline  | 2020/12/12
+[1] water the plants
+
+$ ./todo deadline "2 2020/12/18"
+deadline added to #2
+
+$ ./todo ls
+[2] new task with deadline   | 2020/12/18
+[1] water the plants
 ```
 
 ## Improving README.md

@@ -10,11 +10,11 @@ import sys
 ###Functions###
 def add(todo_item):
     f = open("todo.txt","at")
-    fitem = todo_item+ "\n"
+    fitem = todo_item + "\n"
     f.write(fitem)
     f.close()
     print("Added todo: \"%s\"" %todo_item)
-    exit()
+
 
 def ls():
     try:
@@ -148,7 +148,10 @@ def report():
     except FileNotFoundError:
         print("Error: No todos added")
 
-def deadline(todo_no,deadline):
+def deadline(todo_item):
+    todo_no,deadline = todo_item.split(" ")
+    # print(todo_no)
+    # print(deadline)
     try:
         yyyy,mm,dd = deadline.split("/")
         if(int(yyyy)/10000 != 0 and int(yyyy) < 2020):
@@ -171,33 +174,35 @@ def deadline(todo_no,deadline):
         x = len(data)
         f.close()
 
-        todo_item = int(todo_item)
+        todo_no = int(todo_no)
 
-        if(todo_item > x or todo_item <= 0):
-            print("Error: todo #%d does not exist. Nothing deleted." %todo_item)
+        if(todo_no > x or todo_no <= 0):
+            print("Error: todo #%d does not exist." %todo_no)
             sys.exit()
 
         x = 1
 
         f = open("todo.txt","wt")
         for i in data:
-            if(x == todo_item):
-                taks =i.split("x")
+            if(x == todo_no):
+                taks =i.split("|")
                 if(len(taks)==2):
-                    print("Error deadline already present")
-                    exit()
-                x = x+1
-                fitem = i + "x" +deadline +"\n"
-                f.write(fitem)
+                    # print("Error deadline already present")
+                    x = x+1
+                    fitem = taks[0] + " | " +deadline +"\n"
+                    f.write(fitem)
+                else:
+                    x = x+1
+                    fitem = i + " | " +deadline +"\n"
+                    f.write(fitem)
             else:
                 fitem = i + "\n"
                 f.write(fitem)
             x = x+1
         f.close()
-        print("Deleted todo #%d" %todo_item)
+        print("deadline added to #%d" %todo_no)
     except FileNotFoundError:
         print("Error file not found")
-    f = open("todo.txt","at")
 
 
 if len(sys.argv) > 3:
@@ -231,3 +236,10 @@ if __name__ == "__main__":
         Help()
     elif(sys.argv[1] == "report"):
         report()
+    elif(sys.argv[1] == "deadline"):
+        try:
+            deadline(sys.argv[2])
+        except IndexError:
+            print("Error: Missing NUMBER for marking todo as done.")
+    elif(sys.argv[1] == "gui" or sys.argv[1] == "GUI"):
+        GUI()
