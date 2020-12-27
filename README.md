@@ -234,7 +234,7 @@ $ ./todo deadline "2 2020/12/18"
 deadline added to #2
 
 $ ./todo ls
-[2] new task with deadline   | 2020/12/18
+[2] new task with deadline  | 2020/12/18
 [1] water the plants
 ```
 

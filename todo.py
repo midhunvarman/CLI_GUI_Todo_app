@@ -186,6 +186,7 @@ def deadline(todo_item):
         for i in data:
             if(x == todo_no):
                 taks =i.split("|")
+                taks[0] = taks[0].strip()
                 if(len(taks)==2):
                     # print("Error deadline already present")
                     x = x+1
